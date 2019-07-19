@@ -22,11 +22,6 @@ def main(url,moreinfo):
     driver=webdriver.Chrome(chrome_options=options)
     #driver = webdriver.Chrome()
 
-    fp = open("D:/active-scan-plus-plus/xinyongka.txt","a+")
-    fp.write(time.strftime('%Y-%m-%d',time.localtime(time.time())))
-    fp.write(" -- " + moreinfo)
-    fp.write("\n")
-
     driver.get(url)
     js="var q=document.documentElement.scrollTop=10000"
     driver.execute_script(js)
@@ -42,11 +37,6 @@ def main(url,moreinfo):
     for i in range(len(titles)):
         if "删帖" not in titles[i].text and "【" not in titles[i].text and "广告" not in titles[i].text:
             print("["+moreinfo +"]"+titles[i].text+" - " + titles[i].get_attribute("href"))
-            fp.write(titles[i].text)
-            fp.write(" - ")
-            fp.write(titles[i].get_attribute("href"))
-            fp.write("\n")
-    fp.close()
     driver.quit()
 
 # main("https://www.flyertea.com/forum-priorityclub-1.html","IHG")
